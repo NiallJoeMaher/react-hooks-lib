@@ -541,7 +541,7 @@ name: Test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
   pull_request:
     branches: [ main ]
 
@@ -551,31 +551,46 @@ jobs:
     
     strategy:
       matrix:
-        node-version: [18.x, 20.x]
+        node-version: [18, 20]
     
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
+      - name: Checkout code
+        uses: actions/checkout@v4
         
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run tests
-      run: npm run test:run
-      
-    - name: Run linting
-      run: npm run lint
-      
-    - name: Type check
-      run: npm run type-check
-      
-    - name: Build
-      run: npm run build
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Type check
+        run: npm run type-check
+        
+      - name: Lint
+        run: npm run lint
+        
+      - name: Run tests
+        run: npm run test:run
+        
+      - name: Build library
+        run: npm run build
+        
+      - name: Install example dependencies
+        run: npm run example:install
+        
+      - name: Build example
+        run: npm run example:build
 ```
+
+This workflow will:
+- Run on pushes to `main` and `develop` branches
+- Run on pull requests to `main`
+- Test on Node.js 18 and 20
+- Run type checking, linting, tests, and builds
+- Verify the example app builds correctly
 
 ## 🎉 Congratulations!
 
