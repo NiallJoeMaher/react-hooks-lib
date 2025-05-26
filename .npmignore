@@ -1,0 +1,83 @@
+# Source files (we only want the built dist)
+src/
+*.ts
+*.tsx
+!*.d.ts
+
+# Build and development files
+tsconfig.json
+rollup.config.js
+vitest.config.ts
+.eslintrc.json
+
+# Testing files
+**/__tests__/
+**/*.test.*
+**/*.spec.*
+setupTests.ts
+coverage/
+
+# Development dependencies and configs
+node_modules/
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# CI/CD files
+.github/
+.circleci/
+.travis.yml
+
+# Documentation source (keep README.md)
+docs/
+*.md
+!README.md
+!CHANGELOG.md
+!LICENSE
+
+# Example and demo files
+example/
+examples/
+demo/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.log
+
+# Lock files (let users choose their package manager)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Development scripts
+setup.sh
+
+# Misc
+*.tgz
+.npmrc 
