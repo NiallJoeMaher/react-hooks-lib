@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDebounce, useLocalStorage } from "react-hooks-lib";
+import { useDebounce, useLocalStorage, useToggle } from "react-hooks-lib";
 import "./App.css";
 
 const App: React.FC = () => {
@@ -13,6 +13,7 @@ const App: React.FC = () => {
       <main className="app-main">
         <DebounceExample />
         <LocalStorageExample />
+        <ToggleExample />
       </main>
     </div>
   );
@@ -199,6 +200,92 @@ const LocalStorageExample: React.FC = () => {
             2
           )}
         </pre>
+      </div>
+    </section>
+  );
+};
+
+const ToggleExample: React.FC = () => {
+  const [isVisible, visibilityActions] = useToggle(false);
+  const [isEnabled, enabledActions] = useToggle(true);
+  const [showDetails, detailsActions] = useToggle();
+
+  return (
+    <section className="demo-section">
+      <h2>🔄 useToggle Hook Demo</h2>
+      <p>
+        This hook provides boolean state management with convenient toggle
+        functions.
+      </p>
+
+      <div className="toggle-demos">
+        <div className="demo-group">
+          <h3>Content Visibility</h3>
+          <div className="toggle-controls">
+            <button onClick={visibilityActions.toggle}>
+              Toggle Visibility
+            </button>
+            <button onClick={visibilityActions.setTrue}>Show</button>
+            <button onClick={visibilityActions.setFalse}>Hide</button>
+          </div>
+          <p>
+            Status: <strong>{isVisible ? "Visible" : "Hidden"}</strong>
+          </p>
+          {isVisible && (
+            <div className="toggle-content">
+              <p>🎉 This content is now visible!</p>
+            </div>
+          )}
+        </div>
+
+        <div className="demo-group">
+          <h3>Feature Toggle</h3>
+          <div className="toggle-controls">
+            <button onClick={enabledActions.toggle}>
+              {isEnabled ? "Disable" : "Enable"} Feature
+            </button>
+          </div>
+          <p>
+            Feature Status:{" "}
+            <strong>{isEnabled ? "Enabled" : "Disabled"}</strong>
+          </p>
+          <div
+            className={`feature-indicator ${
+              isEnabled ? "enabled" : "disabled"
+            }`}
+          >
+            {isEnabled ? "✅ Feature is active" : "❌ Feature is inactive"}
+          </div>
+        </div>
+
+        <div className="demo-group">
+          <h3>Details Panel</h3>
+          <div className="toggle-controls">
+            <button onClick={detailsActions.toggle}>
+              {showDetails ? "Hide" : "Show"} Details
+            </button>
+          </div>
+          {showDetails && (
+            <div className="details-panel">
+              <h4>Additional Information</h4>
+              <p>The useToggle hook provides:</p>
+              <ul>
+                <li>
+                  <code>toggle()</code> - Switches between true/false
+                </li>
+                <li>
+                  <code>setTrue()</code> - Forces value to true
+                </li>
+                <li>
+                  <code>setFalse()</code> - Forces value to false
+                </li>
+              </ul>
+              <p>
+                Default initial value is <code>false</code> if not specified.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );
