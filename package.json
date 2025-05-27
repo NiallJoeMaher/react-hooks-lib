@@ -9,6 +9,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nialljoemaher/react-hooks-lib"
+  },
   "scripts": {
     "build": "rollup -c",
     "build:watch": "rollup -c -w",
