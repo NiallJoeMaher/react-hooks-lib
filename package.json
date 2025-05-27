@@ -33,7 +33,7 @@
     "typescript",
     "library"
   ],
-  "author": "Your Name",
+  "author": "Niall Maher",
   "license": "MIT",
   "peerDependencies": {
     "react": ">=16.8.0"
