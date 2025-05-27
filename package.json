@@ -1,6 +1,6 @@
 {
   "name": "@nialljoemaher/react-hooks-lib",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "description": "A reusable React hooks library built with TypeScript and Rollup for a workshop at React Dublin 2025",
   "main": "dist/index.js",
